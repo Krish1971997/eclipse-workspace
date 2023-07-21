@@ -1,0 +1,48 @@
+package com.qsp.studentapp.util;
+
+import java.util.Scanner;
+
+import com.qsp.studentapp.dao.StudentDatabaseOperations;
+import com.qsp.studentapp.dto.Student;
+
+public class MainApp {
+	static Scanner s = new Scanner(System.in);
+
+	public static void main(String[] args) {
+
+		StudentDatabaseOperations operation=new StudentDatabaseOperations();
+		System.out.println("*****Welcome******");
+		while (true) {
+			System.out.println("---------------------------------");
+			System.out.println("1.Registeration\n2.Login\n3.Update password\n4.Exit");
+			System.out.println("---------------------------------");
+
+			System.out.println("Enter your choice");
+			int choice = s.nextInt();
+
+			switch (choice) {
+			case 1:
+				
+				Student s=new Student();
+				boolean isInersted=operation.insertStudent(s);
+				break;
+			case 2:
+
+				break;
+			case 3:
+
+				break;
+			case 4:
+				System.out.println("****Thank you****");
+				System.exit(0);
+				break;
+
+			default:System.out.println("Invalid choice");
+				break;
+			}
+
+		}
+
+	}
+
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"> <!-- bean definitions here -->
+
+	<bean id="t" class="com.ty.setterinjectionforpdtwrapperstring.beans.Test">
+	<property name="x" value="20"></property>
+	<property name="y" value="20.00"></property>
+	<property name="z" value="Pawan"></property>
+	</bean>
+	
+	<bean id="t" class="com.ty.setterinjectionforpdtwrapperstring.beans.Test">
+	<constructor-arg name="x" value="20"></constructor-arg>
+	<constructor-arg name="y" value="20.00"></constructor-arg>
+	<constructor-arg name="z" value="Pawan"></constructor-arg>
+	</bean>
+	
+	
+</beans>

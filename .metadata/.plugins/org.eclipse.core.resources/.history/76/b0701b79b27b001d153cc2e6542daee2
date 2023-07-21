@@ -1,0 +1,106 @@
+package com.qsp.studentapp.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.qsp.studentapp.dto.Student;
+
+public class StudentDatabaseOperations {
+
+	private static final String DRIVERCLASSS="com.mysql.cj.jdbc.Driver";
+	private static final String DBURL="jdbc:mysql://localhost:3306/java?user=root&password=root";
+	
+	public boolean insertStudent(Student stu) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		try {
+			Class.forName(DRIVERCLASSS);
+			String dburl = DBURL;
+			con = DriverManager.getConnection(dburl);
+
+			String query = "insert into student values(?,?,?,?,?)";
+			ps = con.prepareStatement(query);
+			
+			ps.setInt(1, stu.getId());
+			ps.setString(2, stu.getName());
+			ps.setDouble(3, stu.getMarks());
+			ps.setString(4, stu.getEmailId());
+			ps.setString(5,stu.getPassword());
+			int rowAffected = ps.executeUpdate();
+			
+			if (rowAffected != 0)
+				return true;
+			else
+				return false;
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(con!=null)
+				con.close();
+				if(ps!=null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			}
+		return true;
+	}
+	//	Login Student
+	//@SuppressWarnings("finally")
+	public Student loginValidate(String email, String pswd) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		try {
+			Class.forName(DRIVERCLASSS);
+			con=DriverManager.getConnection(DBURL);
+			
+			String query="select *from student where email=? and password=?";
+			ps=con.prepareStatement(query);
+			ps.setString(1, email);
+			ps.setString(2, pswd);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				Student s=new Student();
+				int id=rs.getInt(1);
+				String name=rs.getString(2);
+				double marks=rs.getDouble(3);
+				String mail=rs.getString(4);
+				String password=rs.getString(5);
+				
+				s.setId(id);
+				s.setName(name);
+				s.setMarks(marks);
+				s.setEmailId(email);
+				s.setPassword(password);
+				
+				return s;
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(con!=null)
+				con.close();
+				if(ps!=null) 
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		
+		return null;
+	}
+	}
+}

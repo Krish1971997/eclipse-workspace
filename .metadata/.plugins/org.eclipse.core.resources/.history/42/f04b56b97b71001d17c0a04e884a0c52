@@ -1,0 +1,16 @@
+package com.ty.jdbc;
+
+public class Register_drivers_secondway {
+
+	public static void main(String[] args) {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.driver");
+			System.out.println("Drivers Registerred!!");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Class name is wrong");
+			e.printStackTrace();
+		}
+		
+	}
+}

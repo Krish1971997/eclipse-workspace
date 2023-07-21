@@ -1,0 +1,8 @@
+package com.ty.jdbc_thirdstep;
+
+public class DeleteUsingCommand {
+	public static void main(String[] args) {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+	}
+
+}

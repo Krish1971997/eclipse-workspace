@@ -1,0 +1,112 @@
+package com.qsp.studentapp.util;
+
+import java.util.Scanner;
+
+import com.qsp.studentapp.dao.StudentDatabaseOperations;
+import com.qsp.studentapp.dto.Student;
+
+public class MainApp {
+	static Scanner scan = new Scanner(System.in);
+
+	public static void main(String[] args) {
+
+		StudentDatabaseOperations operation = new StudentDatabaseOperations();
+		System.out.println("*****Welcome******");
+		while (true) {
+			System.out.println("---------------------------------");
+			System.out.println("1.Registeration\n2.Login\n3.Update password\n4.Exit");
+			System.out.println("---------------------------------");
+
+			System.out.println("Enter your choice");
+			int choice = scan.nextInt();
+
+			switch (choice) {
+			case 1:
+				Student s = new Student();
+				System.out.println("Enter the ID");
+				int id = scan.nextInt();
+				System.out.println("Enter the name");
+				String name = scan.next();
+				System.out.println("Enter your marks");
+				double marks = scan.nextDouble();
+				System.out.println("Enter the email ID");
+				String emailID = scan.next();
+				System.out.println("Enter the password");
+				String password = scan.next();
+
+				s.setId(id);
+				s.setName(name);
+				s.setMarks(marks);
+				s.setEmailId(emailID);
+				s.setPassword(password);
+
+				boolean isInersted = operation.insertStudent(s);
+				if (isInersted)
+					System.out.println("Student registered....");
+				else
+					System.out.println("Student not registered");
+				break;
+			case 2:
+				System.out.println("Enter the Email ID");
+				String email = scan.next();
+				System.out.println("Enter the Password");
+				String pswd = scan.next();
+
+				Student logedInStudent = operation.loginValidate(email, pswd);
+				if (logedInStudent == null) {
+					System.out.println("Invalid credentials. Please check Email/Password!!! ");
+				} else {
+					System.out.println("Welcome " + logedInStudent.getName() + "!!!");
+
+					while (true) {
+						System.out.println("************************************************");
+						System.out.println("1.Display all details\n2.Search\n3.Update\n4.Delete");
+						System.out.println("5.Display based on Marks\6.Logout");
+						System.out.println("************************************************");
+
+						System.out.println("Enter your choice");
+						int subChoice = scan.nextInt();
+
+						if (subChoice == 1) {
+
+						}
+						else if (subChoice == 2) {
+
+						}
+						else if (subChoice == 3) {
+
+						}
+						else if (subChoice == 4) {
+
+						}
+						else if (subChoice == 5) {
+
+						}
+						else if (subChoice == 6) {
+							System.out.println("Logged out Successfully!!!!!!!!\nThank you "+logedInStudent.getName());
+							break;
+						}
+						else
+							System.out.println("Invalid choice....");
+					}
+
+				}
+
+				break;
+			case 3:
+
+				break;
+			case 4:
+				System.out.println("****Thank you****");
+				System.exit(0);
+				break;
+
+			default:
+				System.out.println("Invalid choice");
+				break;
+			}
+
+		}
+
+	}
+}

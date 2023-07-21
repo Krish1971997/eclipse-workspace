@@ -1,0 +1,19 @@
+package com.ty.jdbc_secondstep;
+
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import com.mysql.cj.jdbc.Driver;
+
+public class GetConnectionFirstway {
+	public static void main(String[] args) {
+		try {
+			java.sql.Driver d=new Driver();
+			DriverManager.registerDriver(d);
+			System.out.println("Drivers Registered....");
+		} catch (SQLException e) {
+			System.out.println("Drivers not Registered");
+			e.printStackTrace();
+		}
+	}
+}

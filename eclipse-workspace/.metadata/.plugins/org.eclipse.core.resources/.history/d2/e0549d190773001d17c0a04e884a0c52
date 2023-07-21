@@ -1,0 +1,14 @@
+package com.ty.jdbc;
+
+public class GetConnection_secondway {
+	public static void main(String[] args) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("Drivers Registerd!!!....");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Drivers not Registerd");
+			e.printStackTrace();
+		}
+	}
+
+}
